@@ -215,6 +215,8 @@ class Block(Record):
             return self._client.get_collection(parent_id)
         elif parent_table == "space":
             return self._client.get_space(parent_id)
+        elif parent_table == "team":
+            return self._client.get_team(parent_id)
         else:
             return None
 
