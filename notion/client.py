@@ -23,6 +23,7 @@ from .monitor import Monitor
 from .operations import operation_update_last_edited, build_operation
 from .settings import API_BASE_URL
 from .space import Space
+from .team import Team
 from .store import RecordStore
 from .user import User
 from .utils import extract_id, now
@@ -114,7 +115,6 @@ class NotionClient(object):
             space["id"]: {"value": space} for space in space_data["results"]
         }
 
-
     def _set_token(self, email=None, password=None):
         if not email:
             email = input("Enter your Notion email address:\n")
@@ -200,6 +200,14 @@ class NotionClient(object):
         """
         space = self.get_record_data("space", space_id, force_refresh=force_refresh)
         return Space(self, space_id) if space else None
+
+    def get_team(self, team_id: str, force_refresh: bool = False):
+        """
+        Retrieve an instance of Team that maps to the space identified by the ID passed in.
+        """
+        team = self.get_record_data("team", team_id, force_refresh)
+        if team:
+            return Team(self, team_id)
 
     def get_collection_view(self, url_or_id, collection=None, force_refresh=False):
         """
