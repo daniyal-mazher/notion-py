@@ -1,4 +1,5 @@
 from .records import Record
+from .maps import field_map
 
 
 class Team(Record):
