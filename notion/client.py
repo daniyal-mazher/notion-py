@@ -40,17 +40,7 @@ def create_session(client_specified_retry=None):
         retry = Retry(
             5,
             backoff_factor=0.3,
-            status_forcelist=(502, 503, 504),
-            # CAUTION: adding 'POST' to this list which is not technically idempotent
-            allowed_methods=(
-                "POST",
-                "HEAD",
-                "TRACE",
-                "GET",
-                "PUT",
-                "OPTIONS",
-                "DELETE",
-            ),
+            status_forcelist=(502, 503, 504)
         )
     adapter = HTTPAdapter(max_retries=retry)
     session.mount("https://", adapter)
